@@ -10,9 +10,8 @@ import {
 
 class Dashboard extends Component {
   render() {
-    return (
+    return !localStorage.getItem('JWT') ? <Redirect to="/login"/> : (
       <DashboardContainer>
-        { !localStorage.getItem('JWT') && <Redirect to="/login"/> }
         <DashboardBar />
         <MainContainer>
           <ListOfFiles />

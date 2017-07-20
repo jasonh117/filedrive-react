@@ -8,10 +8,6 @@ import {
 
 
 class ListOfFiles extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     this.props.tryGetFolder();
   }

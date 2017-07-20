@@ -26,9 +26,8 @@ class Login extends Component {
   }
 
   render() {
-    return (
+    return localStorage.getItem('JWT') ? <Redirect to="/"/> : (
       <LoginContainer>
-        { localStorage.getItem('JWT') && <Redirect to="/"/> }
         <LoginForm onSubmit={this.handleSubmit.bind(this)}>
           <EmailInput value={this.state.email} onChange={e => this.setState({ email: e.target.value })}/>
           <PasswordInput value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
