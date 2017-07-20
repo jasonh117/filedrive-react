@@ -1,26 +1,28 @@
 import {
-  REQUEST_LOGIN,
-  RECEIVE_LOGIN
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED
 } from './actions';
 
 const initialState = {
   id: null,
   email: null,
   busy: false,
+  error: null
 };
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case REQUEST_LOGIN:
+    case LOGIN_REQUEST:
       return {
-        ...state,
+        ...initialState,
         busy: true
       }
-    case RECEIVE_LOGIN:
+    case LOGIN_SUCCESS:
+    case LOGIN_FAILED:
       return {
-        ...state,
-        busy: false,
-        email: 'blah'
+        ...initialState,
+        ...action.payload
       }
     default:
       return state;
