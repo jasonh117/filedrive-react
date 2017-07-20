@@ -1,33 +1,35 @@
 import api from './api';
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const GET_FOLDER_REQUEST = 'GET_FOLDER_REQUEST';
+export const GET_FOLDER_SUCCESS = 'GET_FOLDER_SUCCESS';
+export const GET_FOLDER_FAILED = 'GET_FOLDER_FAILED';
 
-export const loginRequest = () => ({
-  type: LOGIN_REQUEST
-});
-
-export const loginSuccess = (data) => ({
-  type: LOGIN_SUCCESS,
+export const getFolderRequest = (folder) => ({
+  type: GET_FOLDER_REQUEST,
   payload: {
-    id: data.id,
-    email: data.email
+    folder
   }
 });
 
-export const loginFailed = (error) => ({
-  type: LOGIN_FAILED,
+export const getFolderSuccess = (files) => ({
+  type: GET_FOLDER_SUCCESS,
+  payload: {
+    files
+  }
+});
+
+export const getFolderFailed = (error) => ({
+  type: GET_FOLDER_FAILED,
   payload: {
     error: error.response.data.error
   }
 });
 
-export const tryLogin = (email, password) => {
+export const tryGetFolder = (folder) => {
   return dispatch => {
-    dispatch(loginRequest());
-    return api.login(email, password)
-      .then(data => dispatch(loginSuccess(data)))
-      .catch(error => dispatch(loginFailed(error)));
+    dispatch(getFolderRequest(folder));
+    return api.getFileList(folder)
+      .then(data => dispatch(getFolderSuccess(data)))
+      .catch(error => dispatch(getFolderFailed(error)));
   };
 };

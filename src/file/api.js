@@ -3,14 +3,20 @@ import { apiHost } from '../config';
 
 axios.defaults.baseURL = apiHost;
 
-const login = (email, password) => {
-  return axios.post('/user/login', { email, password })
+const getFileList = (folder) => {
+  return axios.get('/file', {
+    params: {
+      folder
+    },
+    headers: {
+      Authorization: `JWT ${localStorage.getItem('JWT')}`
+    }
+  })
     .then((res) => {
-      localStorage.setItem('JWT', res.data.data.jwt);
       return res.data.data;
     });
 };
 
 export default {
-  login
+  getFileList
 };
