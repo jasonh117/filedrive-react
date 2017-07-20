@@ -46,14 +46,27 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: Immutable(''),
-      password: Immutable('')
+      email: '',
+      password: ''
     };
+  }
+
+  componentWillMount() {
+    if (localStorage.getItem('JWT')) {
+      this.props.history.push('/');
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    api.login(this.state.email, this.state.password);
+    api.login(this.state.email, this.state.password)
+      .then((res) => {
+        this.props.history.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data.error.message);
+      });
   }
 
   render() {
