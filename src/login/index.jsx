@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Immutable from 'seamless-immutable';
-import api from './api';
+import { connect } from 'react-redux';
+import { tryLogin } from './actions';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -59,7 +60,7 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    api.login(this.state.email, this.state.password)
+    this.props.tryLogin(this.state.email, this.state.password)
       .then((res) => {
         this.props.history.push('/');
       })
@@ -82,4 +83,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  tryLogin: (email, password) => dispatch(tryLogin(email, password))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
