@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { tryGetFolder } from '../actions';
+import { tryGetFolder, highlight } from '../actions';
 import FileItem from '../FileItem';
 import {
-  ListOfFilesContainer
+  ListOfFilesContainer,
+  ErrorMessage,
+  Spinner
 } from './components';
 
 
@@ -15,11 +17,20 @@ class ListOfFiles extends Component {
   render() {
     return (
       <ListOfFilesContainer>
+        { this.props.file.busy && <Spinner /> }
         {
           this.props.file.files &&
           this.props.file.files.map(file => (
-            <FileItem key={file.id} file={file}/>
+            <FileItem
+              key={file.id}
+              file={file}
+              highlight={() => this.props.highlight(this.props.file.files, file.id)}
+            />
           ))
+        }
+        {
+          this.props.file.error &&
+          <ErrorMessage>{this.props.file.error.message}</ErrorMessage>
         }
       </ListOfFilesContainer>
     );
@@ -31,7 +42,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  tryGetFolder: (folder) => dispatch(tryGetFolder(folder))
+  tryGetFolder: (folder) => dispatch(tryGetFolder(folder)),
+  highlight: (fileList, fileId) => dispatch(highlight(fileList, fileId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfFiles);

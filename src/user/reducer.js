@@ -18,13 +18,13 @@ export default (state = initialState, action) => {
       return Immutable({
         ...initialState,
         busy: true
-      })
+      });
     case LOGIN_SUCCESS:
     case LOGIN_FAILED:
       return Immutable({
         ...initialState,
         ...action.payload
-      })
+      });
     default:
       return state;
   }

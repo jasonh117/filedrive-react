@@ -33,7 +33,7 @@ export const PasswordInput = styled.input.attrs({
 `;
 
 export const SubmitButton = styled.button.attrs({
-  type: 'submit',
+  type: 'submit'
 })`
   font-size: 20px;
   width: 80px;

@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment';
 import formatBytes from '../../lib/formatBytes';
 import {
   FileItemContainer,
+  FileIcon,
   FileName,
   FileListModified,
-  FileSize
+  FileSize,
 } from './components';
 
 
-class FileItem extends Component {
-  render() {
-    return (
-      <FileItemContainer>
-        <FileName>{this.props.file.originalname}</FileName>
-        <FileListModified>{moment(this.props.file.updatedAt).format('ll')}</FileListModified>
-        <FileSize>{formatBytes(this.props.file.size)}</FileSize>
-      </FileItemContainer>
-    );
-  }
-}
+const FileItem = ({ file, highlight }) => (
+  <FileItemContainer highlight={file.highlighted} onClick={highlight}>
+    <FileIcon />
+    <FileName>{file.originalname}</FileName>
+    <FileListModified>{moment(file.updatedAt).format('ll')}</FileListModified>
+    <FileSize>{formatBytes(file.size)}</FileSize>
+  </FileItemContainer>
+);
 
 export default FileItem;

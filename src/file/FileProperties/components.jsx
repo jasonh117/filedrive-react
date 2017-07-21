@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
 export const FilePropertiesContainer = styled.div`
-  border-left: 2px solid gray;
+  background-color: #D5D5D5;
   flex: 0.3;
 `;

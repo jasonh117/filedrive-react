@@ -16,12 +16,21 @@ export const loginSuccess = (data) => ({
   }
 });
 
-export const loginFailed = (error) => ({
-  type: LOGIN_FAILED,
-  payload: {
-    error: error.response.data.error
+export const loginFailed = (error) => (
+  error.response ? {
+    type: LOGIN_FAILED,
+    payload: {
+      error: error.response.data.error
+    }
+  } : {
+    type: LOGIN_FAILED,
+    payload: {
+      error: {
+        message: 'Failed to login.'
+      }
+    }
   }
-});
+);
 
 export const tryLogin = (email, password) => {
   return dispatch => {
