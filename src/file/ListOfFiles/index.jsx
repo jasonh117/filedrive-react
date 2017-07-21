@@ -25,6 +25,7 @@ class ListOfFiles extends Component {
               key={file.id}
               file={file}
               highlight={() => this.props.highlight(this.props.file.files, file.id)}
+              // TODO: different types of highlights
             />
           ))
         }

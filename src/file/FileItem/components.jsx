@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const FileItemContainer = styled.div`
-  margin-bottom: 1px;
   background-color: ${props => props.highlight ? '#4285f4' : '#FFF'};
   color: ${props => props.highlight ? '#FFF' : '#000'};
   padding: 15px;
@@ -10,6 +9,8 @@ export const FileItemContainer = styled.div`
   align-items: center;
   height: 20px;
   cursor: pointer;
+  border: 1px solid #EBEBEB;
+  margin-top: -1px;
 `;
 
 export const FileIcon = styled.img`
