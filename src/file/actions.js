@@ -1,4 +1,4 @@
-import api from './api';
+import api from 'file/api';
 
 export const GET_FOLDER_REQUEST = 'GET_FOLDER_REQUEST';
 export const GET_FOLDER_SUCCESS = 'GET_FOLDER_SUCCESS';

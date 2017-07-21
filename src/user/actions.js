@@ -1,4 +1,4 @@
-import api from './api';
+import api from 'user/api';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

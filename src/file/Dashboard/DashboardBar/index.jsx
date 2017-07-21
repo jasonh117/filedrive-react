@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {
-  DashboardBarContainer
+  DashboardBarContainer,
+  UploadButton
 } from './components';
-
 
 class DashboardBar extends Component {
   render() {
     return (
       <DashboardBarContainer>
+        <UploadButton>Upload File</UploadButton>
       </DashboardBarContainer>
     );
   }

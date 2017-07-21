@@ -1,6 +1,6 @@
 import axios from 'axios';
 import fileDownload from 'react-file-download';
-import { apiHost } from '../config';
+import { apiHost } from 'config';
 
 axios.defaults.baseURL = apiHost;
 
@@ -30,7 +30,19 @@ const downloadFile = (file) => {
     });
 };
 
+const uploadFile = (file) => {
+  return axios.post(`/file`, {
+    headers: {
+      Authorization: `JWT ${localStorage.getItem('JWT')}`
+    }
+  })
+    // .then((res) => {
+    //   fileDownload(res.data, file.originalname);
+    // });
+};
+
 export default {
   getFileList,
-  downloadFile
+  downloadFile,
+  uploadFile
 };

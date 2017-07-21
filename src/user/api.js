@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiHost } from '../config';
+import { apiHost } from 'config';
 
 axios.defaults.baseURL = apiHost;
 

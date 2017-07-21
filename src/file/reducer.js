@@ -4,7 +4,7 @@ import {
   GET_FOLDER_SUCCESS,
   GET_FOLDER_FAILED,
   HIGHLIGHT_FILE
-} from './actions';
+} from 'file/actions';
 
 const initialState = Immutable({
   busy: false,

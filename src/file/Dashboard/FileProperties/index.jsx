@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
-import formatBytes from '../../lib/formatBytes';
-import api from '../api';
+import formatBytes from 'lib/formatBytes';
+import api from 'file/api';
 import {
   FilePropertiesContainer,
   FilePropertiesList,
@@ -13,7 +12,6 @@ import {
   Content,
   Download
 } from './components';
-
 
 class FileProperties extends Component {
   render() {

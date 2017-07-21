@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Login from './user/Login';
-import Dashboard from './file/Dashboard';
+import Login from 'user/Login';
+import Dashboard from 'file/Dashboard';
 
 class App extends Component {
   render() {

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { tryGetFolder, highlight } from '../actions';
-import FileItem from '../FileItem';
+import { tryGetFolder, highlight } from 'file/actions';
+import FileItem from './FileItem';
 import {
   ListOfFilesContainer,
   ErrorMessage,
   Spinner
 } from './components';
-
 
 class ListOfFiles extends Component {
   componentWillMount() {

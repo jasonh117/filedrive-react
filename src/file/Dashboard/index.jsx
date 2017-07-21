@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import DashboardBar from '../DashboardBar';
-import ListOfFiles from '../ListOfFiles';
-import FileProperties from '../FileProperties';
+import DashboardBar from './DashboardBar';
+import ListOfFiles from './ListOfFiles';
+import FileProperties from './FileProperties';
 import {
   DashboardContainer,
   MainContainer

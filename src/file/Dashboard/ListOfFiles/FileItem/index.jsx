@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import formatBytes from '../../lib/formatBytes';
+import formatBytes from 'lib/formatBytes';
 import {
   FileItemContainer,
   FileIcon,
@@ -8,7 +8,6 @@ import {
   FileListModified,
   FileSize,
 } from './components';
-
 
 const FileItem = ({ file, highlight }) => (
   <FileItemContainer highlight={file.highlighted} onClick={highlight}>

@@ -3,7 +3,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILED
-} from './actions';
+} from 'user/actions';
 
 const initialState = Immutable({
   id: null,
