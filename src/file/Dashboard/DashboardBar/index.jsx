@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleUploadModal } from 'modal/actions'
 import {
   DashboardBarContainer,
-  UploadButton
+  UploadButton,
+  ButtonsContainer,
 } from './components';
 
 class DashboardBar extends Component {
   render() {
     return (
       <DashboardBarContainer>
-        <UploadButton>Upload File</UploadButton>
+        <ButtonsContainer>
+          <UploadButton onClick={this.props.toggleUploadModal}>Upload File</UploadButton>
+        </ButtonsContainer>
       </DashboardBarContainer>
     );
   }
 }
 
-export default DashboardBar;
+const mapDispatchToProps = dispatch => ({
+  toggleUploadModal: () => dispatch(toggleUploadModal())
+})
+
+export default connect(null, mapDispatchToProps)(DashboardBar);

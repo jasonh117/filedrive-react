@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from 'user/Login';
 import Dashboard from 'file/Dashboard';
+import Modals from 'modal';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <div>
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Dashboard} />
+          <Modals />
         </div>
       </BrowserRouter>
     );
