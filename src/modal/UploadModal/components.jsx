@@ -18,4 +18,22 @@ export const Modal = styled.div`
   height: 75vh;
   background-color: #FFF;
   z-index: 3;
+  padding: 15px;
+  position: relative;
+`;
+
+export const Instruction = styled.div`
+  margin: 20px 0;
+`;
+
+export const FileListContainer = styled.div`
+  max-width: 90%;
+  overflow: scroll;
+`;
+
+export const UploadButton = styled.div`
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid black;
+  cursor: pointer;
 `;
