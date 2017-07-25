@@ -13,6 +13,7 @@ export const FilePropertiesList = styled.div`
 
 export const FileActions = styled.div`
   margin: 10px;
+  padding-top: 20px;
 `;
 
 export const Item = styled.div`
@@ -28,7 +29,10 @@ export const Content = styled.span`
   flex: 0.6;
 `;
 
-export const Download = styled.button`
+export const Download = styled.a`
   padding: 10px;
   margin: 10px;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
 `;

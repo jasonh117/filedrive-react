@@ -19,18 +19,6 @@ const getFileList = (folder) => {
     });
 };
 
-const downloadFile = (file) => {
-  return axios.get(`/file/${file.filename}`, {
-    responseType: 'arraybuffer',
-    headers: {
-      Authorization: `JWT ${localStorage.getItem('JWT')}`
-    }
-  })
-    .then((res) => {
-      fileDownload(res.data, file.originalname);
-    });
-};
-
 const uploadFiles = (dispatch, files) => {
   const formData = new FormData();
   files.map(file => formData.append('file', file));
@@ -49,6 +37,5 @@ const uploadFiles = (dispatch, files) => {
 
 export default {
   getFileList,
-  downloadFile,
   uploadFiles
 };

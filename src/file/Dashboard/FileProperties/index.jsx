@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { apiHost } from 'config';
 import formatBytes from 'lib/formatBytes';
-import api from 'file/api';
 import {
   FilePropertiesContainer,
   FilePropertiesList,
@@ -48,7 +48,7 @@ class FileProperties extends Component {
           </Item>
         </FilePropertiesList>
         <FileActions>
-          <Download onClick={() => api.downloadFile(file)}>Download</Download>
+          <Download href={`${apiHost}/file/${file.filename}?jwt=${localStorage.getItem('JWT')}`}>Download</Download>
           {/* TODO: Support features below */}
           {/* <ShareFile></ShareFile> */}
           {/* <ChangePermission></ChangePermission> */}
