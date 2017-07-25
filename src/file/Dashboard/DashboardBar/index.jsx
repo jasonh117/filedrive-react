@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openUploadModal } from 'modal/actions'
+import { openUploadModal } from 'modal/actions';
+import { clearHighlight } from 'file/actions';
 import {
   DashboardBarContainer,
   UploadButton,
@@ -10,7 +11,7 @@ import {
 class DashboardBar extends Component {
   render() {
     return (
-      <DashboardBarContainer>
+      <DashboardBarContainer onClick={this.props.clearHighlight}>
         <ButtonsContainer>
           <UploadButton onClick={this.props.openUploadModal}>Upload File</UploadButton>
         </ButtonsContainer>
@@ -20,7 +21,8 @@ class DashboardBar extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  openUploadModal: () => dispatch(openUploadModal())
+  openUploadModal: () => dispatch(openUploadModal()),
+  clearHighlight: () => dispatch(clearHighlight())
 })
 
 export default connect(null, mapDispatchToProps)(DashboardBar);

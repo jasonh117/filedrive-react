@@ -3,7 +3,8 @@ import {
   GET_FOLDER_REQUEST,
   GET_FOLDER_SUCCESS,
   GET_FOLDER_FAILED,
-  HIGHLIGHT_FILE
+  HIGHLIGHT_FILE,
+  CLEAR_HIGHLIGHT
 } from 'file/actions';
 
 const initialState = Immutable({
@@ -20,7 +21,7 @@ export default (state = initialState, action) => {
       return Immutable({
         ...initialState,
         busy: true,
-        ...action.payload
+        folder: action.payload.folder || state.folder
       });
     case GET_FOLDER_SUCCESS:
     case GET_FOLDER_FAILED:
@@ -34,6 +35,13 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload
       });
+    case CLEAR_HIGHLIGHT:
+      const files = state.files.map(file => ({ ...file, highlighted: false }));
+      return Immutable({
+        ...state,
+        files,
+        selected: null
+      })
     default:
       return state;
   }

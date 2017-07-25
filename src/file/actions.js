@@ -5,6 +5,7 @@ export const GET_FOLDER_REQUEST = 'GET_FOLDER_REQUEST';
 export const GET_FOLDER_SUCCESS = 'GET_FOLDER_SUCCESS';
 export const GET_FOLDER_FAILED = 'GET_FOLDER_FAILED';
 export const HIGHLIGHT_FILE = 'HIGHLIGHT_FILE';
+export const CLEAR_HIGHLIGHT = 'CLEAR_HIGHLIGHT';
 
 export const getFolderRequest = (folder) => ({
   type: GET_FOLDER_REQUEST,
@@ -36,18 +37,48 @@ export const getFolderFailed = (error) => (
     }
 );
 
-export const highlight = (fileList, fileId) => {
-  const files = fileList.map(file => (
-    file.id === fileId ? { ...file, highlighted: !file.highlighted } : file
-  ));
-  return ({
-    type: HIGHLIGHT_FILE,
-    payload: {
-      files,
-      selected: fileId
+export const highlight = (fileId, extraKey) => {
+  return (dispatch, getState) => {
+    const fileList = getState().file.files;
+    const selected = getState().file.selected;
+    let files = null;
+    switch (extraKey) {
+      case 'meta':
+        files = fileList.map(file => (
+          file.id === fileId ? { ...file, highlighted: !file.highlighted } : file
+        ));
+        break;
+      case 'shift':
+        let selection = false;
+        files = fileList.map(file => {
+          if (file.id === selected || file.id === fileId) {
+            selection = !selection;
+          }
+          let highlighted = true;
+          if (file.id !== fileId && !selection) {
+            highlighted = file.highlighted;
+          }
+          return { ...file, highlighted }
+        });
+        break;
+      default:
+        files = fileList.map(file => ({
+          ...file, highlighted: file.id === fileId
+        }));
     }
-  });
+    return dispatch({
+      type: HIGHLIGHT_FILE,
+      payload: {
+        files,
+        selected: fileId
+      }
+    });
+  }
 };
+
+export const clearHighlight = () => ({
+  type: CLEAR_HIGHLIGHT
+});
 
 export const tryGetFolder = (folder) => {
   return dispatch => {

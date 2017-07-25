@@ -13,6 +13,13 @@ class ListOfFiles extends Component {
     this.props.tryGetFolder();
   }
 
+  highlight(e, file) {
+    let extraKey = null;
+    if (e.metaKey) extraKey = 'meta';
+    else if (e.shiftKey) extraKey = 'shift';
+    this.props.highlight(file.id, extraKey);
+  }
+
   render() {
     return (
       <ListOfFilesContainer>
@@ -23,8 +30,7 @@ class ListOfFiles extends Component {
             <FileItem
               key={file.id}
               file={file}
-              highlight={() => this.props.highlight(this.props.file.files, file.id)}
-              // TODO: different types of highlights
+              highlight={e => this.highlight(e, file)}
             />
           ))
         }
@@ -43,7 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   tryGetFolder: (folder) => dispatch(tryGetFolder(folder)),
-  highlight: (fileList, fileId) => dispatch(highlight(fileList, fileId))
+  highlight: (fileId, extraKey) => dispatch(highlight(fileId, extraKey))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfFiles);
