@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Line } from 'rc-progress';
 
 export const UploadModalContainer = styled.div`
   background-color: rgba(33, 33, 33, 0.5);
@@ -36,4 +37,15 @@ export const UploadButton = styled.div`
   padding: 10px;
   border: 1px solid black;
   cursor: pointer;
+`;
+
+export const ErrorMessage = styled.p`
+  font-size: 20px;
+  margin: 20px;
+  color: red;
+  text-align: center;
+`;
+
+export const ProgressBar = styled(Line)`
+  width: 90%;
 `;

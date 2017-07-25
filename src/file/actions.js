@@ -1,4 +1,5 @@
 import api from 'file/api';
+import { closeUploadModal, uploadProgress } from 'modal/actions'
 
 export const GET_FOLDER_REQUEST = 'GET_FOLDER_REQUEST';
 export const GET_FOLDER_SUCCESS = 'GET_FOLDER_SUCCESS';
@@ -26,18 +27,18 @@ export const getFolderFailed = (error) => (
       error: error.response.data.error
     }
   } : {
-    type: GET_FOLDER_FAILED,
-    payload: {
-      error: {
-        message: 'Failed to retrieve files.'
+      type: GET_FOLDER_FAILED,
+      payload: {
+        error: {
+          message: 'Failed to retrieve files.'
+        }
       }
     }
-  }
 );
 
 export const highlight = (fileList, fileId) => {
   const files = fileList.map(file => (
-    file.id === fileId ? { ...file, highlighted: !file.highlighted } : file 
+    file.id === fileId ? { ...file, highlighted: !file.highlighted } : file
   ));
   return ({
     type: HIGHLIGHT_FILE,
@@ -54,5 +55,23 @@ export const tryGetFolder = (folder) => {
     return api.getFileList(folder)
       .then(data => dispatch(getFolderSuccess(data)))
       .catch(error => dispatch(getFolderFailed(error)));
+  };
+};
+
+export const tryUpload = (files) => {
+  return dispatch => {
+    return api.uploadFiles(dispatch, files)
+      .then(() => {
+        dispatch(uploadProgress(0));
+        dispatch(closeUploadModal());
+        dispatch(tryGetFolder());
+      })
+      .catch(err => {
+        const error = err.response ? err.response.data.error : {
+          message: 'Failed to upload.'
+        };
+        dispatch(uploadProgress(0));
+        return Promise.reject(error);
+      });
   };
 };

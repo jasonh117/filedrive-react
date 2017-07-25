@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleUploadModal } from 'modal/actions'
+import { openUploadModal } from 'modal/actions'
 import {
   DashboardBarContainer,
   UploadButton,
@@ -12,7 +12,7 @@ class DashboardBar extends Component {
     return (
       <DashboardBarContainer>
         <ButtonsContainer>
-          <UploadButton onClick={this.props.toggleUploadModal}>Upload File</UploadButton>
+          <UploadButton onClick={this.props.openUploadModal}>Upload File</UploadButton>
         </ButtonsContainer>
       </DashboardBarContainer>
     );
@@ -20,7 +20,7 @@ class DashboardBar extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleUploadModal: () => dispatch(toggleUploadModal())
+  openUploadModal: () => dispatch(openUploadModal())
 })
 
 export default connect(null, mapDispatchToProps)(DashboardBar);

@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleUploadModal } from 'modal/actions'
 import Dropzone from 'react-dropzone';
+import { closeUploadModal } from 'modal/actions'
+import { tryUpload } from 'file/actions';
 import {
   UploadModalContainer,
   Modal,
   UploadButton,
   Instruction,
-  FileListContainer
+  FileListContainer,
+  ErrorMessage,
+  ProgressBar
 } from './components';
+
+const initState = {
+  files: null,
+  busy: false,
+  error: null
+}
 
 class UploadModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      files: null
-    };
+    this.state = initState;
+  }
+
+  uploadFiles(e) {
+    e.stopPropagation();
+    this.setState({ busy: true });
+    this.props.tryUpload(this.state.files)
+      .then(() => {
+        this.setState(initState);
+      })
+      .catch(error => {
+        this.setState({ error, busy: false });
+      });
   }
 
   render() {
     return (
-      <UploadModalContainer onClick={this.props.toggleUploadModal}>
+      <UploadModalContainer onClick={this.props.closeUploadModal}>
         <Modal onClick={e => e.stopPropagation()}>
           <Dropzone
-            onDrop={files => this.setState({ files })}
+            onDrop={files => this.setState({ files, error: null })}
             style={{
               width: '100%',
               height: '100%',
@@ -51,7 +70,15 @@ class UploadModal extends Component {
             </FileListContainer>
             {
               this.state.files &&
-              <UploadButton onClick={e => e.stopPropagation()}>UPLOAD</UploadButton>
+              <UploadButton onClick={this.uploadFiles.bind(this)}>UPLOAD</UploadButton>
+            }
+            {
+              this.state.busy &&
+              <ProgressBar percent={this.props.uploadProgress*100} />
+            }
+            {
+              this.state.error &&
+              <ErrorMessage>{this.state.error.message}</ErrorMessage>
             }
           </Dropzone>
         </Modal>
@@ -60,8 +87,14 @@ class UploadModal extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  busy: state.file.busy,
+  uploadProgress: state.modal.uploadProgress
+});
+
 const mapDispatchToProps = dispatch => ({
-  toggleUploadModal: () => dispatch(toggleUploadModal())
+  closeUploadModal: () => dispatch(closeUploadModal()),
+  tryUpload: files => dispatch(tryUpload(files))
 })
 
-export default connect(null, mapDispatchToProps)(UploadModal);
+export default connect(mapStateToProps, mapDispatchToProps)(UploadModal);

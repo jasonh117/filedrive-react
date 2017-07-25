@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fileDownload from 'react-file-download';
 import { apiHost } from 'config';
+import { uploadProgress } from 'modal/actions'
 
 axios.defaults.baseURL = apiHost;
 
@@ -30,19 +31,24 @@ const downloadFile = (file) => {
     });
 };
 
-const uploadFile = (file) => {
-  return axios.post(`/file`, {
+const uploadFiles = (dispatch, files) => {
+  const formData = new FormData();
+  files.map(file => formData.append('file', file));
+  return axios.post(`/file`, formData, {
     headers: {
       Authorization: `JWT ${localStorage.getItem('JWT')}`
+    },
+    onUploadProgress: e => {
+      dispatch(uploadProgress(e.loaded/e.total));
     }
   })
-    // .then((res) => {
-    //   fileDownload(res.data, file.originalname);
-    // });
+    .then((res) => {
+      return res.data.data;
+    });
 };
 
 export default {
   getFileList,
   downloadFile,
-  uploadFile
+  uploadFiles
 };
