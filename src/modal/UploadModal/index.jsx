@@ -69,7 +69,7 @@ class UploadModal extends Component {
               }
             </FileListContainer>
             {
-              this.state.files &&
+              this.state.files && !this.state.busy &&
               <UploadButton onClick={this.uploadFiles.bind(this)}>UPLOAD</UploadButton>
             }
             {

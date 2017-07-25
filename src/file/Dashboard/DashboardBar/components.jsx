@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { commonButton } from 'lib/components';
 
 export const DashboardBarContainer = styled.div`
   height: 50px;
@@ -7,12 +8,14 @@ export const DashboardBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
 `;
 
-export const UploadButton = styled.button`
-  height: 25px;
-  width: 100px;
-  cursor: pointer;
+export const UploadButton = commonButton.extend`
+  padding: 5px 10px;
 `;
 
 export const ButtonsContainer = styled.div`

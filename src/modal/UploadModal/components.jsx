@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Line } from 'rc-progress';
+import { commonButton } from 'lib/components';
 
 export const UploadModalContainer = styled.div`
   background-color: rgba(33, 33, 33, 0.5);
@@ -12,6 +13,10 @@ export const UploadModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
 `;
 
 export const Modal = styled.div`
@@ -32,11 +37,8 @@ export const FileListContainer = styled.div`
   overflow: scroll;
 `;
 
-export const UploadButton = styled.div`
+export const UploadButton = commonButton.extend`
   margin: 20px 0;
-  padding: 10px;
-  border: 1px solid black;
-  cursor: pointer;
 `;
 
 export const ErrorMessage = styled.p`
@@ -48,4 +50,5 @@ export const ErrorMessage = styled.p`
 
 export const ProgressBar = styled(Line)`
   width: 90%;
+  margin: 30px;
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { commonButton } from 'lib/components';
 
 export const FilePropertiesContainer = styled.div`
   padding: 20px;
@@ -14,6 +15,10 @@ export const FilePropertiesList = styled.div`
 export const FileActions = styled.div`
   margin: 10px;
   padding-top: 20px;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
 `;
 
 export const Item = styled.div`
@@ -29,12 +34,10 @@ export const Content = styled.span`
   flex: 0.6;
 `;
 
-export const Download = styled.a.attrs({
+export const Download = commonButton.withComponent('a').extend.attrs({
   download: true
 })`
-  padding: 10px;
   margin: 10px;
-  border: 1px solid black;
   color: black;
   text-decoration: none;
 `;
