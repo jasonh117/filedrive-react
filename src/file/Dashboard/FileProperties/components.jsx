@@ -29,7 +29,9 @@ export const Content = styled.span`
   flex: 0.6;
 `;
 
-export const Download = styled.a`
+export const Download = styled.a.attrs({
+  download: true
+})`
   padding: 10px;
   margin: 10px;
   border: 1px solid black;

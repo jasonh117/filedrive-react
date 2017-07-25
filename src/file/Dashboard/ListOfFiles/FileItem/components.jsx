@@ -11,6 +11,7 @@ export const FileItemContainer = styled.div`
   cursor: pointer;
   border: 1px solid #EBEBEB;
   margin-top: -1px;
+  overflow: hidden;
 `;
 
 export const FileIcon = styled.img`

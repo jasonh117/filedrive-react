@@ -1,5 +1,4 @@
 import axios from 'axios';
-import fileDownload from 'react-file-download';
 import { apiHost } from 'config';
 import { uploadProgress } from 'modal/actions'
 
