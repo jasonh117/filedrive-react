@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { commonButton } from 'lib/components';
 
-export const LoginContainer = styled.div`
+export const RegisterContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 150px;
 `;
 
-export const LoginForm = styled.form`
+export const RegisterForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +36,10 @@ export const PasswordInput = styled.input.attrs({
   margin-bottom: 20px;
 `;
 
+export const ConfirmPasswordInput = PasswordInput.extend.attrs({
+  placeholder: 'Confirm Password'
+})``;
+
 export const SubmitButton = commonButton.withComponent('button').extend.attrs({
   type: 'submit'
 })`
@@ -50,8 +54,8 @@ export const ErrorMessage = styled.p`
   color: red;
 `;
 
-export const RegisterButton = commonButton.withComponent(Link).extend.attrs({
-  to: '/register'
+export const LoginButton = commonButton.withComponent(Link).extend.attrs({
+  to: '/login'
 })`
   font-size: 20px;
   text-decoration: none;

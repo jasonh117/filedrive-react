@@ -35,6 +35,10 @@ class ListOfFiles extends Component {
           ))
         }
         {
+          this.props.file.files && this.props.file.files.length === 0 &&
+          <p>You have no files.</p>
+        }
+        {
           this.props.file.error &&
           <ErrorMessage>{this.props.file.error.message}</ErrorMessage>
         }

@@ -2,7 +2,8 @@ import Immutable from 'seamless-immutable';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILED
+  LOGIN_FAILED,
+  LOGIN_RESET
 } from 'user/actions';
 
 const initialState = Immutable({
@@ -25,6 +26,8 @@ export default (state = initialState, action) => {
         ...initialState,
         ...action.payload
       });
+    case LOGIN_RESET:
+      return initialState;
     default:
       return state;
   }

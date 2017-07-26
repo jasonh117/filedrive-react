@@ -11,6 +11,15 @@ const login = (email, password) => {
     });
 };
 
+const register = (email, password) => {
+  return axios.post('/user', { email, password })
+    .then((res) => {
+      localStorage.setItem('JWT', res.data.data.jwt);
+      return res.data.data;
+    });
+};
+
 export default {
-  login
+  login,
+  register
 };

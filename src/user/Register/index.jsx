@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { tryLogin, loginReset } from 'user/actions';
+import { tryRegister, loginReset } from 'user/actions';
 import {
-  LoginContainer,
-  LoginForm,
+  RegisterContainer,
+  RegisterForm,
   EmailInput,
   PasswordInput,
   SubmitButton,
   ErrorMessage,
-  RegisterButton,
-  ButtonContainer
+  LoginButton,
+  ButtonContainer,
+  ConfirmPasswordInput
 } from './components';
 
 const initState = {
   email: '',
-  password: ''
+  password: '',
+  confirmPassword: ''
 };
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
@@ -31,23 +33,24 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.tryLogin(this.state.email, this.state.password);
+    this.props.tryRegister(this.state.email, this.state.password, this.state.confirmPassword);
   }
 
   render() {
     return localStorage.getItem('JWT') ? <Redirect to="/" /> : (
-      <LoginContainer>
-        <LoginForm onSubmit={this.handleSubmit.bind(this)}>
-          <h1>Login</h1>
+      <RegisterContainer>
+        <RegisterForm onSubmit={this.handleSubmit.bind(this)}>
+          <h1>Register</h1>
           <EmailInput value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
           <PasswordInput value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+          <ConfirmPasswordInput value={this.state.confirmPassword} onChange={e => this.setState({ confirmPassword: e.target.value })} />
           <ButtonContainer>
-            <SubmitButton>Sign in</SubmitButton>
-            <RegisterButton>Register</RegisterButton>
+            <SubmitButton>Register</SubmitButton>
+            <LoginButton>Sign in</LoginButton>
           </ButtonContainer>
           {this.props.user.error && <ErrorMessage>{this.props.user.error.message}</ErrorMessage>}
-        </LoginForm>
-      </LoginContainer>
+        </RegisterForm>
+      </RegisterContainer>
     );
   }
 }
@@ -57,8 +60,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  tryLogin: (email, password) => dispatch(tryLogin(email, password)),
+  tryRegister: (email, password, confirmPassword) => dispatch(tryRegister(email, password, confirmPassword)),
   loginReset: () => dispatch(loginReset())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

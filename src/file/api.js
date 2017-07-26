@@ -15,6 +15,13 @@ const getFileList = (folder) => {
   })
     .then((res) => {
       return res.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        localStorage.removeItem('JWT');
+        return;
+      }
+      return Promise.reject(error);
     });
 };
 
