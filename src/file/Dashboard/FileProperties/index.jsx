@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { apiHost } from 'config';
 import formatBytes from 'lib/formatBytes';
+import { deleteFile } from 'file/actions';
 import {
   FilePropertiesContainer,
   FilePropertiesList,
@@ -10,7 +11,8 @@ import {
   Item,
   Label,
   Content,
-  Download
+  Download,
+  Delete
 } from './components';
 
 class FileProperties extends Component {
@@ -49,10 +51,10 @@ class FileProperties extends Component {
         </FilePropertiesList>
         <FileActions>
           <Download href={`${apiHost}/file/${file.filename}?jwt=${localStorage.getItem('JWT')}`}>Download</Download>
+          <Delete onClick={() => this.props.deleteFile(file.filename)}>Delete</Delete>
           {/* TODO: Support features below */}
           {/* <ShareFile></ShareFile> */}
           {/* <ChangePermission></ChangePermission> */}
-          {/* <Delete></Delete> */}
         </FileActions>
       </FilePropertiesContainer>
     );
@@ -63,4 +65,8 @@ const mapStateToProps = state => ({
   file: state.file
 });
 
-export default connect(mapStateToProps, null)(FileProperties);
+const mapDispatchToProps = dispatch => ({
+  deleteFile: (filename) => dispatch(deleteFile(filename))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileProperties);

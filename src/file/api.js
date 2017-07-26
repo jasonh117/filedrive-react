@@ -34,7 +34,16 @@ const uploadFiles = (dispatch, files) => {
     });
 };
 
+const deleteFile = (filename) => {
+  return axios.delete(`/file/${filename}`, {
+    headers: {
+      Authorization: `JWT ${localStorage.getItem('JWT')}`
+    }
+  });
+};
+
 export default {
   getFileList,
-  uploadFiles
+  uploadFiles,
+  deleteFile
 };

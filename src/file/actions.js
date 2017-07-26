@@ -93,9 +93,7 @@ export const tryUpload = (files) => {
   return dispatch => {
     return api.uploadFiles(dispatch, files)
       .then(() => {
-        dispatch(uploadProgress(0));
-        dispatch(closeUploadModal());
-        dispatch(tryGetFolder());
+        refreshDashboard(dispatch);
       })
       .catch(err => {
         const error = err.response ? err.response.data.error : {
@@ -105,4 +103,19 @@ export const tryUpload = (files) => {
         return Promise.reject(error);
       });
   };
+};
+
+export const refreshDashboard = (dispatch) => {
+  dispatch(uploadProgress(0));
+  dispatch(closeUploadModal());
+  dispatch(tryGetFolder());
+};
+
+export const deleteFile = (filename) => {
+  return dispatch => {
+    return api.deleteFile(filename)
+      .then(() => {
+        refreshDashboard(dispatch);
+      })
+  }
 };

@@ -41,3 +41,8 @@ export const Download = commonButton.withComponent('a').extend.attrs({
   color: black;
   text-decoration: none;
 `;
+
+export const Delete = commonButton.extend`
+  margin: 10px;
+  width: 90px;
+`;
