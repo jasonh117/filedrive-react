@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { tryGetFolder, highlight } from 'file/actions';
+import { tryGetFolder, highlight, clearHighlight } from 'file/actions';
 import FileItem from './FileItem';
 import {
   ListOfFilesContainer,
@@ -22,7 +22,10 @@ class ListOfFiles extends Component {
 
   render() {
     return (
-      <ListOfFilesContainer>
+      <ListOfFilesContainer onClick={e => {
+        if (e.target === e.currentTarget)
+          this.props.clearHighlight();
+      }}>
         { this.props.file.busy && <Spinner /> }
         {
           this.props.file.files &&
@@ -53,7 +56,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   tryGetFolder: (folder) => dispatch(tryGetFolder(folder)),
-  highlight: (fileId, extraKey) => dispatch(highlight(fileId, extraKey))
+  highlight: (fileId, extraKey) => dispatch(highlight(fileId, extraKey)),
+  clearHighlight: () => dispatch(clearHighlight())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfFiles);
