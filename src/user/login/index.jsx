@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { tryLogin, loginReset } from 'user/actions';
+import { tryLogin } from 'user/actions';
 import {
   LoginContainer,
   LoginForm,
@@ -15,7 +15,8 @@ import {
 
 const initState = {
   email: '',
-  password: ''
+  password: '',
+  error: null
 };
 
 class Login extends Component {
@@ -26,12 +27,14 @@ class Login extends Component {
 
   componentWillMount() {
     this.setState(initState);
-    this.props.loginReset();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.tryLogin(this.state.email, this.state.password);
+    this.props.tryLogin(this.state.email, this.state.password)
+      .catch((error) => {
+        this.setState({ error });
+      });
   }
 
   render() {
@@ -45,7 +48,7 @@ class Login extends Component {
             <SubmitButton>Sign in</SubmitButton>
             <RegisterButton to="/register">Register</RegisterButton>
           </ButtonContainer>
-          {this.props.user.error && <ErrorMessage>{this.props.user.error.message}</ErrorMessage>}
+          {this.state.error && <ErrorMessage>{this.state.error.message}</ErrorMessage>}
         </LoginForm>
       </LoginContainer>
     );
@@ -57,8 +60,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  tryLogin: (email, password) => dispatch(tryLogin(email, password)),
-  loginReset: () => dispatch(loginReset())
+  tryLogin: (email, password) => dispatch(tryLogin(email, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

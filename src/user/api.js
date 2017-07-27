@@ -19,7 +19,19 @@ const register = (email, password) => {
     });
 };
 
+const updateSettings = (user) => {
+  return axios.patch('/user', user, {
+    headers: {
+      Authorization: `JWT ${localStorage.getItem('JWT')}`
+    }
+  })
+    .then((res) => {
+      return res.data.data;
+    });
+};
+
 export default {
   login,
-  register
+  register,
+  updateSettings
 };

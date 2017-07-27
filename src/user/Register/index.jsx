@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { tryRegister, loginReset } from 'user/actions';
+import { tryRegister } from 'user/actions';
 import {
   RegisterContainer,
   RegisterForm,
@@ -17,7 +17,8 @@ import {
 const initState = {
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  error: null
 };
 
 class Register extends Component {
@@ -28,12 +29,22 @@ class Register extends Component {
 
   componentWillMount() {
     this.setState(initState);
-    this.props.loginReset();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.tryRegister(this.state.email, this.state.password, this.state.confirmPassword);
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({
+        error: {
+          message: 'Passwords do not match.'
+        }
+      });
+      return;
+    }
+    this.props.tryRegister(this.state.email, this.state.password, this.state.confirmPassword)
+      .catch((error) => {
+        this.setState({ error });
+      });
   }
 
   render() {
@@ -48,7 +59,7 @@ class Register extends Component {
             <SubmitButton>Register</SubmitButton>
             <LoginButton to="/login">Sign in</LoginButton>
           </ButtonContainer>
-          {this.props.user.error && <ErrorMessage>{this.props.user.error.message}</ErrorMessage>}
+          {this.state.error && <ErrorMessage>{this.state.error.message}</ErrorMessage>}
         </RegisterForm>
       </RegisterContainer>
     );
@@ -60,8 +71,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  tryRegister: (email, password, confirmPassword) => dispatch(tryRegister(email, password, confirmPassword)),
-  loginReset: () => dispatch(loginReset())
+  tryRegister: (email, password, confirmPassword) => dispatch(tryRegister(email, password, confirmPassword))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
