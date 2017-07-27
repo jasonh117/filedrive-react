@@ -50,12 +50,8 @@ export const ErrorMessage = styled.p`
   color: red;
 `;
 
-export const RegisterButton = commonButton.withComponent(Link).extend.attrs({
-  to: '/register'
-})`
+export const RegisterButton = commonButton.withComponent(Link).extend`
   font-size: 20px;
-  text-decoration: none;
-  color: black;
 `;
 
 export const ButtonContainer = styled.div`

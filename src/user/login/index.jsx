@@ -43,7 +43,7 @@ class Login extends Component {
           <PasswordInput value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
           <ButtonContainer>
             <SubmitButton>Sign in</SubmitButton>
-            <RegisterButton>Register</RegisterButton>
+            <RegisterButton to="/register">Register</RegisterButton>
           </ButtonContainer>
           {this.props.user.error && <ErrorMessage>{this.props.user.error.message}</ErrorMessage>}
         </LoginForm>

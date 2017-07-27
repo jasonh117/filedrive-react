@@ -46,7 +46,7 @@ class Register extends Component {
           <ConfirmPasswordInput value={this.state.confirmPassword} onChange={e => this.setState({ confirmPassword: e.target.value })} />
           <ButtonContainer>
             <SubmitButton>Register</SubmitButton>
-            <LoginButton>Sign in</LoginButton>
+            <LoginButton to="/login">Sign in</LoginButton>
           </ButtonContainer>
           {this.props.user.error && <ErrorMessage>{this.props.user.error.message}</ErrorMessage>}
         </RegisterForm>

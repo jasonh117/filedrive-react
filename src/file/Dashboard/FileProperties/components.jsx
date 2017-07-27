@@ -14,11 +14,15 @@ export const FilePropertiesList = styled.div`
 
 export const FileActions = styled.div`
   margin: 10px;
-  padding-top: 20px;
+  padding-top: 10px;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid black;
 `;
 
 export const Item = styled.div`
@@ -38,11 +42,8 @@ export const Download = commonButton.withComponent('a').extend.attrs({
   download: true
 })`
   margin: 10px;
-  color: black;
-  text-decoration: none;
 `;
 
 export const Delete = commonButton.extend`
   margin: 10px;
-  width: 90px;
 `;

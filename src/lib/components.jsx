@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const commonButton = styled.div`
+  text-decoration: none;
+  color: black;
   padding: 10px;
   border: 1px solid black;
   cursor: pointer;

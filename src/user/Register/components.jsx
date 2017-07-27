@@ -54,12 +54,8 @@ export const ErrorMessage = styled.p`
   color: red;
 `;
 
-export const LoginButton = commonButton.withComponent(Link).extend.attrs({
-  to: '/login'
-})`
+export const LoginButton = commonButton.withComponent(Link).extend`
   font-size: 20px;
-  text-decoration: none;
-  color: black;
 `;
 
 export const ButtonContainer = styled.div`
