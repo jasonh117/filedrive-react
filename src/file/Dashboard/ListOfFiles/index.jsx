@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { tryGetFolder, highlight, clearHighlight } from 'file/actions';
+import { openContentModal } from 'modal/actions';
 import FileItem from './FileItem';
 import {
   ListOfFilesContainer,
@@ -34,6 +35,7 @@ class ListOfFiles extends Component {
               key={file.id}
               file={file}
               highlight={e => this.highlight(e, file)}
+              openModal={this.props.openContentModal}
             />
           ))
         }
@@ -57,7 +59,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   tryGetFolder: (folder) => dispatch(tryGetFolder(folder)),
   highlight: (fileId, extraKey) => dispatch(highlight(fileId, extraKey)),
-  clearHighlight: () => dispatch(clearHighlight())
-})
+  clearHighlight: () => dispatch(clearHighlight()),
+  openContentModal: () => dispatch(openContentModal())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfFiles);

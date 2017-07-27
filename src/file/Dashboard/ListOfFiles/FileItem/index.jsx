@@ -9,8 +9,8 @@ import {
   FileSize,
 } from './components';
 
-const FileItem = ({ file, highlight }) => (
-  <FileItemContainer highlight={file.highlighted} onClick={highlight}>
+const FileItem = ({ file, highlight, openModal }) => (
+  <FileItemContainer highlight={file.highlighted} onClick={highlight} onDoubleClick={openModal}>
     <FileIcon />
     <FileName>{file.originalname}</FileName>
     <FileListModified>{moment(file.updatedAt).format('ll')}</FileListModified>

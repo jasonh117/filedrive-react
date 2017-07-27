@@ -25,6 +25,6 @@ class DashboardBar extends Component {
 
 const mapDispatchToProps = dispatch => ({
   openUploadModal: () => dispatch(openUploadModal())
-})
+});
 
 export default connect(null, mapDispatchToProps)(DashboardBar);

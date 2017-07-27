@@ -89,6 +89,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateSettings: (user) => dispatch(updateSettings(user))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

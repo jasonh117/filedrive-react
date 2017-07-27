@@ -18,9 +18,7 @@ import {
 class FileProperties extends Component {
   render() {
     const file = this.props.file.files &&
-      this.props.file.files.find(file => {
-        return file.id === this.props.file.selected
-      });
+      this.props.file.files.find(file => file.id === this.props.file.selected);
     return !file ? <FilePropertiesContainer /> : (
       <FilePropertiesContainer>
         <FilePropertiesList>
@@ -67,6 +65,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteFile: (filename) => dispatch(deleteFile(filename))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileProperties);

@@ -2,6 +2,8 @@ import Immutable from 'seamless-immutable';
 import {
   OPEN_UPLOAD_MODAL,
   CLOSE_UPLOAD_MODAL,
+  OPEN_CONTENT_MODAL,
+  CLOSE_CONTENT_MODAL,
   UPLOAD_PROGRESS
 } from 'modal/actions';
 
@@ -21,6 +23,16 @@ export default (state = initialState, action) => {
       return Immutable({
         ...state,
         uploadModal: false
+      });
+    case OPEN_CONTENT_MODAL:
+      return Immutable({
+        ...state,
+        contentModal: true
+      });
+    case CLOSE_CONTENT_MODAL:
+      return Immutable({
+        ...state,
+        contentModal: false
       });
     case UPLOAD_PROGRESS:
       return Immutable({

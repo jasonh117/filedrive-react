@@ -95,6 +95,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   closeUploadModal: () => dispatch(closeUploadModal()),
   tryUpload: files => dispatch(tryUpload(files))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UploadModal);

@@ -72,6 +72,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   tryRegister: (email, password, confirmPassword) => dispatch(tryRegister(email, password, confirmPassword))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
