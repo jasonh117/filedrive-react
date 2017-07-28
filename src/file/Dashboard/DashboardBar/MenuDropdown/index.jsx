@@ -19,7 +19,7 @@ class MenuDropdown extends Component {
   render() {
     return (
       <div>
-        <MenuButton onClick={() => this.setState({ open: !this.state.open })}>|||</MenuButton>
+        <MenuButton className="fa fa-bars" onClick={() => this.setState({ open: !this.state.open })} />
         {
           this.state.open &&
           <Dropdown handleClickOutside={() => this.setState({ open: false })}>

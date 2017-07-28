@@ -11,7 +11,7 @@ export const DropdownContainer = styled.div`
   flex-direction: column;
 `;
 
-export const MenuButton = commonButton.extend`
+export const MenuButton = commonButton.withComponent('i').extend`
   padding: 5px 10px;
 `;
 

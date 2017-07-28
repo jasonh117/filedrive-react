@@ -14,7 +14,7 @@ export const FileItemContainer = styled.div`
   overflow: hidden;
 `;
 
-export const FileIcon = styled.img`
+export const FileIcon = styled.i`
   width: 20px;
   height: 20px;
   margin-right: 15px;
