@@ -6,12 +6,14 @@ import {
   ContentModalContainer,
   Modal,
   Text,
+  Pdf
 } from './components';
 
 class ContentModal extends Component {
   getContent(file) {
+    const [type, subtype] = file.mimetype.split('/');
     const src = `${apiHost}/file/${file.filename}?jwt=${localStorage.getItem('JWT')}&view=true`;
-    switch (file.mimetype.split('/')[0]) {
+    switch (type) {
       case 'text':
         return <Text title={file.originalname} src={src} />;
       case 'image':
@@ -20,6 +22,10 @@ class ContentModal extends Component {
         return <audio alt={file.originalname} src={src} controls />;
       case 'video':
         return <video alt={file.originalname} src={src} controls />;
+      case 'application':
+        if (subtype === 'pdf') {
+          return <Pdf src={src} />
+        }
       default:
         return <div>Cannot preview this file.</div>;
     }

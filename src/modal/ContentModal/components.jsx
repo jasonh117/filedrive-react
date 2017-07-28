@@ -18,13 +18,15 @@ export const Modal = styled.div`
   z-index: 3;
   padding: 15px;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Text = styled.iframe`
   width: 50vw;
   height: 50vh;
   border: none;
+`;
+
+export const Pdf = styled.embed`
+  width: 75vw;
+  height: 90vh;
 `;
