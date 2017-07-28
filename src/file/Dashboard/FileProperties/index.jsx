@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { apiHost } from 'config';
-import formatBytes from 'lib/formatBytes';
+import format from 'lib/format';
 import { deleteFile } from 'file/actions';
 import {
   FilePropertiesContainer,
@@ -32,7 +31,7 @@ class FileProperties extends Component {
           </Item>
           <Item>
             <Label>File Size</Label>
-            <Content>{formatBytes(file.size)}</Content>
+            <Content>{format.bytes(file.size)}</Content>
           </Item>
           <Item>
             <Label>Location</Label>
@@ -40,11 +39,11 @@ class FileProperties extends Component {
           </Item>
           <Item>
             <Label>Last Modified</Label>
-            <Content>{moment(file.updatedAt).format('ll')}</Content>
+            <Content>{format.datetime(file.updatedAt)}</Content>
           </Item>
           <Item>
             <Label>Created At</Label>
-            <Content>{moment(file.createdAt).format('ll')}</Content>
+            <Content>{format.datetime(file.updatedAt)}</Content>
           </Item>
         </FilePropertiesList>
         <FileActions>

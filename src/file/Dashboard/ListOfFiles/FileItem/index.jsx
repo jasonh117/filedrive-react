@@ -1,12 +1,11 @@
 import React from 'react';
-import moment from 'moment';
-import formatBytes from 'lib/formatBytes';
+import format from 'lib/format';
 import {
   FileItemContainer,
   FileIcon,
   FileName,
   FileListModified,
-  FileSize,
+  FileSize
 } from './components';
 
 const typeToClass = {
@@ -37,8 +36,8 @@ const FileItem = ({ file, highlight, openModal }) => (
   <FileItemContainer highlight={file.highlighted} onClick={highlight} onDoubleClick={openModal}>
     <FileIcon className={getFileClass(file.mimetype)} aria-hidden="true" />
     <FileName>{file.originalname}</FileName>
-    <FileListModified>{moment(file.updatedAt).format('ll')}</FileListModified>
-    <FileSize>{formatBytes(file.size)}</FileSize>
+    <FileListModified>{format.datetime(file.updatedAt)}</FileListModified>
+    <FileSize>{format.bytes(file.size)}</FileSize>
   </FileItemContainer>
 );
 
