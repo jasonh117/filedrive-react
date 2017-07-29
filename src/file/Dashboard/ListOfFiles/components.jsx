@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import OriginalSpinner from 'react-spinkit';
 
 export const ListOfFilesContainer = styled.div`
   background-color: #F2F2F2;
@@ -17,10 +16,4 @@ export const ErrorMessage = styled.p`
   margin: 0;
   color: red;
   text-align: center;
-`;
-
-export const Spinner = styled(OriginalSpinner).attrs({
-  name: 'circle'
-})`
-  margin: 0 auto;
 `;

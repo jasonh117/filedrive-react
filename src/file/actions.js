@@ -7,11 +7,9 @@ export const GET_FOLDER_FAILED = 'GET_FOLDER_FAILED';
 export const HIGHLIGHT_FILE = 'HIGHLIGHT_FILE';
 export const CLEAR_HIGHLIGHT = 'CLEAR_HIGHLIGHT';
 
-export const getFolderRequest = (folder) => ({
+export const getFolderRequest = (options) => ({
   type: GET_FOLDER_REQUEST,
-  payload: {
-    folder
-  }
+  payload: options || {}
 });
 
 export const getFolderSuccess = (files) => ({
@@ -80,10 +78,17 @@ export const clearHighlight = () => ({
   type: CLEAR_HIGHLIGHT
 });
 
-export const tryGetFolder = (folder) => {
-  return dispatch => {
-    dispatch(getFolderRequest(folder));
-    return api.getFileList(folder)
+export const tryGetFolder = (options) => {
+  return (dispatch, getState) => {
+    const file = getState().file;
+    const sendOptions = {
+      folder: file.folder,
+      sort: file.sort,
+      desc: file.desc,
+      ...options
+    }
+    dispatch(getFolderRequest(sendOptions));
+    return api.getFileList(sendOptions)
       .then(data => dispatch(getFolderSuccess(data)))
       .catch(error => dispatch(getFolderFailed(error)));
   };

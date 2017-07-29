@@ -4,11 +4,9 @@ import { uploadProgress } from 'modal/actions'
 
 axios.defaults.baseURL = apiHost;
 
-const getFileList = (folder) => {
+const getFileList = (options) => {
   return axios.get('/file', {
-    params: {
-      folder
-    },
+    params: options,
     headers: {
       Authorization: `JWT ${localStorage.getItem('JWT')}`
     }

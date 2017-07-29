@@ -34,7 +34,7 @@ const getFileClass = (mimetype) => {
 
 const FileItem = ({ file, highlight, openModal }) => (
   <FileItemContainer highlight={file.highlighted} onClick={highlight} onDoubleClick={openModal}>
-    <FileIcon className={getFileClass(file.mimetype)} aria-hidden="true" />
+    <FileIcon className={getFileClass(file.mimetype)} />
     <FileName>{file.originalname}</FileName>
     <FileListModified>{format.datetime(file.updatedAt)}</FileListModified>
     <FileSize>{format.bytes(file.size)}</FileSize>

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { tryGetFolder, highlight, clearHighlight } from 'file/actions';
 import { openContentModal } from 'modal/actions';
+import FileBar from './FileBar';
 import FileItem from './FileItem';
 import {
   ListOfFilesContainer,
-  ErrorMessage,
-  Spinner
+  ErrorMessage
 } from './components';
 
 class ListOfFiles extends Component {
@@ -27,7 +27,7 @@ class ListOfFiles extends Component {
         if (e.target === e.currentTarget)
           this.props.clearHighlight();
       }}>
-        { this.props.file.busy && <Spinner /> }
+        { this.props.file.files && <FileBar /> }
         {
           this.props.file.files &&
           this.props.file.files.map(file => (
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  tryGetFolder: (folder) => dispatch(tryGetFolder(folder)),
+  tryGetFolder: (options) => dispatch(tryGetFolder(options)),
   highlight: (fileId, extraKey) => dispatch(highlight(fileId, extraKey)),
   clearHighlight: () => dispatch(clearHighlight()),
   openContentModal: () => dispatch(openContentModal())

@@ -12,7 +12,9 @@ const initialState = Immutable({
   error: null,
   folder: '/',
   selected: null,
-  files: null
+  files: null,
+  sort: 'originalname',
+  desc: false
 });
 
 export default (state = initialState, action) => {
@@ -20,14 +22,19 @@ export default (state = initialState, action) => {
     case GET_FOLDER_REQUEST:
       return Immutable({
         ...initialState,
+        files: state.files,
         busy: true,
-        folder: action.payload.folder || state.folder
+        folder: action.payload.folder || state.folder,
+        sort: action.payload.sort || state.sort,
+        desc: action.payload.desc !== undefined ? action.payload.desc : state.desc
       });
     case GET_FOLDER_SUCCESS:
     case GET_FOLDER_FAILED:
       return Immutable({
         ...initialState,
         folder: state.folder,
+        sort: state.sort,
+        desc: state.desc,
         ...action.payload
       });
     case HIGHLIGHT_FILE:
