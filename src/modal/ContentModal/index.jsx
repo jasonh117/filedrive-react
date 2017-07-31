@@ -22,11 +22,10 @@ class ContentModal extends Component {
         return <audio alt={file.originalname} src={src} controls />;
       case 'video':
         return <video alt={file.originalname} src={src} controls />;
-      case 'application':
+      default:
         if (subtype === 'pdf') {
           return <Pdf src={src} />
         }
-      default:
         return <div>Cannot preview this file.</div>;
     }
   }
