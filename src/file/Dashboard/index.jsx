@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import DashboardBar from './DashboardBar';
 import ListOfFiles from './ListOfFiles';
 import FileProperties from './FileProperties';
+import { openUploadModal } from 'modal/actions';
 import {
   DashboardContainer,
   MainContainer
@@ -11,7 +13,7 @@ import {
 class Dashboard extends Component {
   render() {
     return !localStorage.getItem('JWT') ? <Redirect to="/login"/> : (
-      <DashboardContainer>
+      <DashboardContainer onDragEnter={this.props.openUploadModal}>
         <DashboardBar />
         <MainContainer>
           <ListOfFiles />
@@ -22,4 +24,8 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => ({
+  openUploadModal: () => dispatch(openUploadModal())
+});
+
+export default connect(null, mapDispatchToProps)(Dashboard);
