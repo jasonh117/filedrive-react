@@ -24,7 +24,7 @@ class ListOfFiles extends Component {
   render() {
     return (
       <ListOfFilesContainer onClick={e => {
-        if (e.target === e.currentTarget)
+        if (e.target === e.currentTarget && this.props.file.files)
           this.props.clearHighlight();
       }}>
         { this.props.file.files && <FileBar /> }
