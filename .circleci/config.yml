@@ -6,6 +6,10 @@ jobs:
 
     working_directory: ~/filedrive-react
 
+    branches:
+      only:
+        - master
+
     steps:
       - checkout
 
