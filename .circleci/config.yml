@@ -27,4 +27,7 @@ jobs:
 
       - deploy: 
           name: Deploy Github Pages
-          command: yarn run deploy
+          command: |
+            git config --global user.email circleci@circleci
+            git config --global user.name CircleCI
+            yarn run deploy
