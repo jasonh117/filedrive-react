@@ -1,9 +1,11 @@
 {
+  "homepage": "https://jasonh117.github.io/filedrive-react",
   "name": "filedrive-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "gh-pages": "^1.0.0",
     "moment": "^2.18.1",
     "rc-progress": "^2.2.2",
     "react": "^15.6.1",
@@ -21,6 +23,8 @@
     "styled-components": "^2.1.2"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
